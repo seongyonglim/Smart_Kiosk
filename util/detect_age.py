@@ -37,5 +37,6 @@ class Detector:
         return info
 
     def detector(self, img):
+
         self.detector(img, self.cascade, self.ageNet, self.genderNet, self.ModelMean, self.ageList, self.genderList)
 
