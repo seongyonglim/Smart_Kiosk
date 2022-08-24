@@ -2,7 +2,7 @@ import cv2
 class Detector:
     def __init__(self):
         self.cascade = cv2.CascadeClassifier('../models/haarcascade_frontalface_alt.xml')
-        self.ModelMean = (78.4263377603, 87.7689143744, 114.895847746)
+        self.ModelMean = (78.4263377603, 87.7689143745, 114.895847746)
         self.ageNet = cv2.dnn.readNetFromCaffe('../models/deployAge.prototxt', '../models/ageNet.caffemodel')
         self.genderNet = cv2.dnn.readNetFromCaffe('../models/deployGender.prototxt', '../models/genderNet.caffemodel')
 
