@@ -21,7 +21,7 @@ class MyApp(QWidget):
         s.setInterval(1000)
         s.setFixedWidth(300)
         s.setFixedHeight(900)
-        s.setFilenames(['default.png', './images/default2.png', './images/default3.png'])
+        s.setFilenames(["./images/default_01.jpg", "./images/default_02.jpg", "./images/default_03.jpg"])
 
         grid.addWidget(s, 0, 0)
 

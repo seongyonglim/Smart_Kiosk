@@ -1,17 +1,10 @@
 import cv2
+
+
 class Detector:
-    def __init__(self):
-        self.cascade = cv2.CascadeClassifier('../models/haarcascade_frontalface_alt.xml')
-        self.ModelMean = (78.4263377603, 87.7689143745, 114.895847746)
-        self.ageNet = cv2.dnn.readNetFromCaffe('../models/deployAge.prototxt', '../models/ageNet.caffemodel')
-        self.genderNet = cv2.dnn.readNetFromCaffe('../models/deployGender.prototxt', '../models/genderNet.caffemodel')
 
-        self.ageList = ['(0 ~ 2)', '(4 ~ 6)', '(8 ~ 12)', '(15 ~ 20)',
-                   '(25 ~ 32)', '(38 ~ 43)', '(48 ~ 53)', '(60 ~ 100)']
-        self.genderList = ['남성', '여성']
-
-    def detector(img, cascade, ageNet, genderNet, ModelMean, ageList,genderList):
-        img = cv2.resize(img, dsize= None, fx = 1.0, fy = 1.0)
+    def detector( self, img, cascade, ageNet, genderNet, ModelMean, ageList, genderList):
+        img = cv2.resize(img, dsize=(320,320), fx = 1.0, fy = 1.0)
         img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = cascade.detectMultiScale(img_gray , scaleFactor=1.5 , minNeighbors=5 , minSize=(20,20))
     
@@ -32,11 +25,28 @@ class Detector:
             cv2.putText(img, info, (x, y - 15), 0, 0.5, (0, 255, 0), 1)
     
         # 사진 출력
-        #cv2.imshow('facenet', img)
-        #cv2.waitKey()
-        return info
+        cv2.imshow('Age', img)
+        cv2.waitKey()
+        print(info)
 
-    def detector(self, img):
+    def detect(self, img):
+        cascade = cv2.CascadeClassifier('../models/haarcascade_frontalface_alt.xml')
+        ModelMean = (78.4263377603, 87.7689143745, 114.895847746)
+        ageNet = cv2.dnn.readNetFromCaffe('../models/deployAge.prototxt', '../models/ageNet.caffemodel')
+        genderNet = cv2.dnn.readNetFromCaffe('../models/deployGender.prototxt', '../models/genderNet.caffemodel')
 
-        self.detector(img, self.cascade, self.ageNet, self.genderNet, self.ModelMean, self.ageList, self.genderList)
+        ageList = ['(0 ~ 2)', '(4 ~ 10)', '(15 ~ 25)', '(30 ~ 35)',
+                   '(40 ~ 52)', '(58 ~ 63)', '(68 ~ 73)', '(80 ~ 100)']
+        genderList = ['Man', 'Female']
 
+        self.detector(img, cascade, ageNet, genderNet, ModelMean, ageList, genderList)
+
+img = cv2.imread('../images/Test01.jfif')
+
+
+
+
+#img = cv2.imread('../images/Test10.jpg')
+#cv2.imshow('facenet', img)
+obj = Detector()
+obj.detect(img)

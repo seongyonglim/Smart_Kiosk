@@ -32,13 +32,13 @@ class SlideShow(QWidget):
         self.__btnWidget = QWidget()
 
         self.__prevBtn = SvgButton(self)
-        self.__prevBtn.setIcon('ico/prev.svg')
+        self.__prevBtn.setIcon('./ico/arrow-previous-left-icon.svg')
         self.__prevBtn.setFixedSize(30, 50)
         self.__prevBtn.clicked.connect(self.__prev)
         self.__prevBtn.setEnabled(False)
 
         self.__nextBtn = SvgButton(self)
-        self.__nextBtn.setIcon('ico/next.svg')
+        self.__nextBtn.setIcon('./ico/arrow-next-right-icon.svg')
         self.__nextBtn.setFixedSize(30, 50)
         self.__nextBtn.clicked.connect(self.__next)
 
@@ -103,12 +103,14 @@ class SlideShow(QWidget):
         self.__filenames = filenames
         lay = QHBoxLayout()
         for i in range(len(self.__filenames)):
+
             btn = AniRadioButton()
             btn.setFixedSize(30, 15)
             lay.addWidget(btn)
             self.__btn.append(btn)
             self.__btnGroup.addButton(btn, i)
         self.__btn[0].setChecked(True)
+        print(self.__filenames)
         self.__view.setFilename(self.__filenames[0])
         self.__btnWidget.setLayout(lay)
 
