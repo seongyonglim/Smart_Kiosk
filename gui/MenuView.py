@@ -39,6 +39,6 @@ class MyWindow(QMainWindow, form_class):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     myWindow = MyWindow()
-    #myWindow.showFullScreen()
+
     myWindow.show()
     app.exec_()
