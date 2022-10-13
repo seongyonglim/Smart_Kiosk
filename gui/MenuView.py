@@ -6,7 +6,7 @@ from PyQt5.QtGui import QPixmap
 from util.ReadDataBase import ReadDB
 
 form_class = uic.loadUiType("../resources/menu.ui")[0]
-asd
+
 class MyWindow(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
@@ -33,6 +33,8 @@ class MyWindow(QMainWindow, form_class):
 
             self.price_list[index].setText(str(readData[index]['p_price']))
             self.price_list[index].setFont(QtGui.QFont("굴림", 15))
+
+
 
 
 
