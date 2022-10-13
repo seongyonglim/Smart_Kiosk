@@ -14,15 +14,19 @@ class ReadDB :
         self.cursor = self.mysqldb.cursor(pymysql.cursors.DictCursor)
 
 
-    def getMenu(self):
-        sql = "SELECT * FROM kiosk_db.product;"
+    def getMenu(self,category):
+        sql = "SELECT * FROM kiosk_db.product WHERE p_category ='" + str(category) + "';"
         self.cursor.execute(query=sql)
 
         result = self.cursor.fetchall()
         return result
 
+    def getAllMenu(self):
+        sql = "SELECT * FROM kiosk_db.product;"
+        self.cursor.execute(query=sql)
+
+        result = self.cursor.fetchall()
+        return result
 if __name__ == "__main__" :
     readDb = ReadDB()
     result = readDb.getMenu()
-    for data in result:
-        print(data)

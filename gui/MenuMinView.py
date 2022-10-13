@@ -12,7 +12,7 @@ class MyWindow(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
         self.readDb =  ReadDB()
-        readData = self.readDb.getMenu()
+        readData = self.readDb.getAllMenu()
 
         self.image_list = [self.product_image_1,self.product_image_2,self.product_image_3,self.product_image_4,
                            self.product_image_5,self.product_image_6,self.product_image_7,self.product_image_8]
