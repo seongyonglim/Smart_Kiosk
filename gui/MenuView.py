@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
-
+import copy
 from gui.Cart_dialog import CartDialog
 from util.ReadDataBase import ReadDB
 import time
@@ -59,17 +59,6 @@ class Menu(QMainWindow, form_class):
         self.createCategoryButton()
         # 카테고리 1 메뉴 로드
         self.createMenu(1)
-        self.addOrder("order_name1", 1, 1000)
-        self.addOrder("order_name2", 2, 2000)
-        self.addOrder("order_name3", 3, 3000)
-        self.addOrder("order_name4", 4, 4000)
-        self.addOrder("order_name5", 5, 6000)
-        self.addOrder("order_name6", 6, 7000)
-
-
-
-
-
 
     def createCategoryButton(self):
         for cur in range(0,len(self.category_name_list)):
@@ -211,23 +200,32 @@ class Menu(QMainWindow, form_class):
 
             self.price_list[index].setText(str(readData[index]['p_price']))
             self.price_list[index].setFont(QtGui.QFont("굴림", 15))
-            self.clickable(self.image_list[0]).connect(lambda: self.showDialog(readData[0]))
-        '''
-        if(category == 1) :
-            self.clickable(self.image_list[0]).connect(lambda: self.showDialog(readData[0]))
-            self.clickable(self.image_list[1]).connect(lambda: self.showDialog(readData[1]))
-            self.clickable(self.image_list[2]).connect(lambda: self.showDialog(readData[2]))
-            self.clickable(self.image_list[3]).connect(lambda: self.showDialog(readData[3]))
-            self.clickable(self.image_list[4]).connect(lambda: self.showDialog(readData[4]))
-            self.clickable(self.image_list[5]).connect(lambda: self.showDialog(readData[5]))
-        elif category == 2:
-            self.clickable(self.image_list[0]).connect(lambda: self.showDialog(readData[0]))
-            self.clickable(self.image_list[1]).connect(lambda: self.showDialog(readData[1]))
-            self.clickable(self.image_list[2]).connect(lambda: self.noneMethod)
-            self.clickable(self.image_list[3]).connect(lambda: self.noneMethod)
-            self.clickable(self.image_list[4]).connect(lambda: self.noneMethod)
-            self.clickable(self.image_list[5]).connect(lambda: self.noneMethod)
-        '''
+
+            # 람다식의 참조 변수를 변화시키기 위해 하드코딩
+            if index == 0:
+                data0 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data0]))
+            elif index == 1:
+                data1 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data1]))
+            elif index == 2:
+                data2 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data2]))
+            elif index == 3:
+                data3 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data3]))
+            elif index == 4:
+                data4 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data4]))
+            elif index == 5:
+                data5 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data5]))
+            elif index == 6:
+                data6 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data6]))
+            elif index == 7:
+                data7 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.showDialog(readData[data7]))
 
         for index in range(len(readData) + 1, 9):
             index = index - 1
@@ -240,6 +238,32 @@ class Menu(QMainWindow, form_class):
 
             self.price_list[index].setText("")
             self.price_list[index].setFont(QtGui.QFont("굴림", 15))
+
+            # 람다식의 참조 변수를 변화시키기 위해 하드코딩
+            if index == 0:
+                data00 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data00]))
+            elif index == 1:
+                data01 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data01]))
+            elif index == 2:
+                data02 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data02]))
+            elif index == 3:
+                data03 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data03]))
+            elif index == 4:
+                data04 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data04]))
+            elif index == 5:
+                data05 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data05]))
+            elif index == 6:
+                data06 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data06]))
+            elif index == 7:
+                data07 = copy.deepcopy(index)
+                self.clickable(self.image_list[index]).connect(lambda: self.noneMethod(readData[data07]))
 
 
     #  위젯 클릭 이벤트 Util
