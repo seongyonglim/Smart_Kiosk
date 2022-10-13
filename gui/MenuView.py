@@ -228,6 +228,7 @@ class Menu(QMainWindow, form_class):
             self.clickable(self.image_list[4]).connect(lambda: self.noneMethod)
             self.clickable(self.image_list[5]).connect(lambda: self.noneMethod)
         '''
+
         for index in range(len(readData) + 1, 9):
             index = index - 1
             img_obj = QPixmap("../resources/etc/default.jpg")
