@@ -5,17 +5,24 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
+
+from gui.Cart_dialog import CartDialog
 from util.ReadDataBase import ReadDB
 import time
 
 form_class = uic.loadUiType("../resources/menu.ui")[0]
 
-class MyWindow(QMainWindow, form_class):
+dialog_form_class = uic.loadUiType("../resources/cart_dialog.ui")[0]
+
+
+class Menu(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.readDb =  ReadDB()
 
+        # 장바구니 다이얼 로그 생성
+        self.cartDialog = self.createDialog()
         ###########################################
         # 오더 위젯들 리스트
         self.order_layout_list = []
@@ -61,6 +68,9 @@ class MyWindow(QMainWindow, form_class):
 
 
 
+
+
+
     def createCategoryButton(self):
         for cur in range(0,len(self.category_name_list)):
             category_button = QPushButton(self.category_name_list[cur])
@@ -68,7 +78,6 @@ class MyWindow(QMainWindow, form_class):
             self.category_button_list.append(category_button)
             self.category_button_layout.addWidget(category_button)
 
-        # 람다식 선언은 직접 선언해야되므로 for문으로 생성불가
         self.category_button_list[0].clicked.connect(lambda: self.createMenu(0))
         self.category_button_list[1].clicked.connect(lambda: self.createMenu(1))
         self.category_button_list[2].clicked.connect(lambda: self.createMenu(2))
@@ -184,11 +193,14 @@ class MyWindow(QMainWindow, form_class):
     ##########      주문 리스트의 버튼 끝
     ##########################################################
 
+    def showDialog(self,data):
+        self.cartDialog.setProduct(data)
+        self.cartDialog.showModal()
 
-
+    def noneMethod(self):
+        1==1
     def createMenu(self,category):
         readData = self.readDb.getMenu(category)
-        print(readData)
         for index in range(0, len(readData)):
             img_obj = QPixmap(readData[index]['p_img_url'])
             # img_obj.scaledToWidth(284)
@@ -199,7 +211,23 @@ class MyWindow(QMainWindow, form_class):
 
             self.price_list[index].setText(str(readData[index]['p_price']))
             self.price_list[index].setFont(QtGui.QFont("굴림", 15))
-
+            self.clickable(self.image_list[0]).connect(lambda: self.showDialog(readData[0]))
+        '''
+        if(category == 1) :
+            self.clickable(self.image_list[0]).connect(lambda: self.showDialog(readData[0]))
+            self.clickable(self.image_list[1]).connect(lambda: self.showDialog(readData[1]))
+            self.clickable(self.image_list[2]).connect(lambda: self.showDialog(readData[2]))
+            self.clickable(self.image_list[3]).connect(lambda: self.showDialog(readData[3]))
+            self.clickable(self.image_list[4]).connect(lambda: self.showDialog(readData[4]))
+            self.clickable(self.image_list[5]).connect(lambda: self.showDialog(readData[5]))
+        elif category == 2:
+            self.clickable(self.image_list[0]).connect(lambda: self.showDialog(readData[0]))
+            self.clickable(self.image_list[1]).connect(lambda: self.showDialog(readData[1]))
+            self.clickable(self.image_list[2]).connect(lambda: self.noneMethod)
+            self.clickable(self.image_list[3]).connect(lambda: self.noneMethod)
+            self.clickable(self.image_list[4]).connect(lambda: self.noneMethod)
+            self.clickable(self.image_list[5]).connect(lambda: self.noneMethod)
+        '''
         for index in range(len(readData) + 1, 9):
             index = index - 1
             img_obj = QPixmap("../resources/etc/default.jpg")
@@ -213,6 +241,20 @@ class MyWindow(QMainWindow, form_class):
             self.price_list[index].setFont(QtGui.QFont("굴림", 15))
 
 
+    #  위젯 클릭 이벤트 Util
+    def clickable(self,widget):
+        class Filter(QObject):
+            clicked = pyqtSignal()
+            def eventFilter(self, obj, event):
+                if obj == widget:
+                    if event.type() == QEvent.MouseButtonRelease:
+                        if obj.rect().contains(event.pos()):
+                            self.clicked.emit()
+                            return True
+                return False
+        filter = Filter(widget)
+        widget.installEventFilter(filter)
+        return filter.clicked
 
     # 레이아웃 제거 Util
     def deleteItemsOfLayout(self,layout):
@@ -235,24 +277,87 @@ class MyWindow(QMainWindow, form_class):
                 break
 
 
-    #  위젯 클릭 이벤트 Util
-    def clickable(widget):
-        class Filter(QObject):
-            clicked = pyqtSignal()
-            def eventFilter(self, obj, event):
-                if obj == widget:
-                    if event.type() == QEvent.MouseButtonRelease:
-                        if obj.rect().contains(event.pos()):
-                            self.clicked.emit()
-                            return True
-                return False
-        filter = Filter(widget)
-        widget.installEventFilter(filter)
-        return filter.clicked
 
+
+    def createDialog(self):
+        return Menu.CartDialog(self)
+
+    class CartDialog(QDialog, dialog_form_class):
+        def __init__(self, outer_instance):
+            self.outer_instance = outer_instance
+            QDialog.__init__(self, outer_instance)
+            self.setupUi(self)
+
+            self.btn_putCart.clicked.connect(lambda : self.addCart())
+            self.count_plus.clicked.connect(lambda  : self.countPlus())
+            self.count_minus.clicked.connect(lambda: self.countMinus())
+
+
+
+        def setProduct(self,row_data):
+            self.row_data = row_data
+
+            # 이미지
+            img_obj = QPixmap(self.row_data['p_img_url'])
+            self.dialog_Image_label.setPixmap(img_obj)
+
+            # 상품명
+            self.product_name.setText(self.row_data['p_name'])
+            # 상품 가격
+            self.product_price.setText(str(self.row_data['p_price']))
+            # 총가격
+            self.product_total_price.setText(str(self.row_data['p_price']))
+
+            self.product_price.setFont(QtGui.QFont("굴림", 15))
+            # 삼풍 설명
+            self.product_detail.setText(self.row_data['p_detail'])
+
+
+            # 영양 성분표 데이터 split
+            nutirition_str = str(self.row_data['p_nutrition'])
+            split_str = nutirition_str.split('/')
+            print(split_str)
+
+            product_weight          = split_str[0]
+            product_kcal            = split_str[1]
+            product_carbohydrate    = split_str[2]
+            product_protein         = split_str[3]
+            product_transFat        = split_str[4]
+            product_salt            = split_str[5]
+
+
+
+            self.nutritopn_weight.setText(product_weight + "g")
+            self.nutritopn_kcal.setText(product_kcal + "kcal")
+            self.nutritopn_carbohydrate.setText(product_carbohydrate + "g")
+            self.nutritopn_protein.setText(product_protein + "g")
+            self.nutritopn_transfat.setText(product_transFat + "mg")
+            self.nutritopn_salt.setText(product_salt + "mg")
+
+        def countPlus(self):
+            count = int(self.product_count.text()) + 1
+            total_price = self.row_data['p_price'] * count
+
+            self.product_count.setText(str(count))
+            self.product_total_price.setText(str(total_price))
+
+        def countMinus(self):
+            if int(self.product_count.text()) - 1 > 0 :
+                count = int(self.product_count.text()) - 1
+                total_price = self.row_data['p_price'] * count
+                self.product_count.setText(str(count))
+                self.product_total_price.setText(str(total_price))
+
+        def addCart(self):
+
+            self.outer_instance.addOrder(self.row_data["p_name"], int(self.product_count.text()), self.row_data["p_price"])
+            self.close()
+
+        def showModal(self):
+            return super().exec_()
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    myWindow = MyWindow()
+    myWindow = Menu()
 
     myWindow.show()
     app.exec_()

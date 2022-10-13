@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Cart</class>
+ <widget class="QDialog" name="Cart">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>630</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cart</string>
+  </property>
+  <widget class="QPushButton" name="btn_putCart">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>552</y>
+     <width>631</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>장바구니 담기</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dialog_Image_label">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>284</width>
+     <height>177</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>280</y>
+     <width>631</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_name">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>10</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>상품명</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_price">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>60</y>
+     <width>56</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>5,500원</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_detail">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>230</y>
+     <width>591</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>상품 설명</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>312</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>중량</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>352</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>열량</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>400</y>
+     <width>56</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>탄수화물</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>440</y>
+     <width>56</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>단백질</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>469</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>트랜스 지방</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>519</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>나트륨</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nutritopn_weight">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>311</y>
+     <width>56</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>155g</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nutritopn_kcal">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>352</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>155kcal</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nutritopn_carbohydrate">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>392</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>115g</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nutritopn_protein">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>431</y>
+     <width>56</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>37g</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nutritopn_transfat">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>471</y>
+     <width>56</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0mg</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nutritopn_salt">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>512</y>
+     <width>56</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1358mg</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="count_plus">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>120</y>
+     <width>31</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="count_minus">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>120</y>
+     <width>31</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>122</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>수량</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_count">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>110</y>
+     <width>56</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_price_4">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>170</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>총 금액</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_total_price">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>160</y>
+     <width>56</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>5,500원</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="product_price_6">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>70</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>가격</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
