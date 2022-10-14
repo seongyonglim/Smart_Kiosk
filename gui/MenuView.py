@@ -6,7 +6,6 @@ from PyQt5 import uic
 from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
 import copy
-from gui.Cart_dialog import CartDialog
 from util.ReadDataBase import ReadDB
 import time
 

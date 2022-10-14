@@ -6,13 +6,16 @@ from PyQt5.QtGui import QPixmap
 from util.ReadDataBase import ReadDB
 
 form_class = uic.loadUiType("../resources/simple_menu.ui")[0]
-
+form_class2 = uic.loadUiType("../resources/simple_payment.ui")[0]
 class MyWindow(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.readDb =  ReadDB()
         readData = self.readDb.getAllMenu()
+        self.simple_payment = self.Simple_payment(self)
+        self.vlayout = QVBoxLayout()
+        self.hlayout_list = []
 
         self.image_list = [self.product_image_1,self.product_image_2,self.product_image_3,self.product_image_4,
                            self.product_image_5,self.product_image_6,self.product_image_7,self.product_image_8]
@@ -22,6 +25,7 @@ class MyWindow(QMainWindow, form_class):
 
         self.price_list = [self.product_price_1, self.product_price_2, self.product_price_3, self.product_price_4,
                            self.product_price_5, self.product_price_6, self.product_price_7, self.product_price_8]
+        print(len(readData))
 
         for index in range(0, len(readData)):
             img_obj = QPixmap(readData[index]['p_img_url'])
@@ -36,9 +40,18 @@ class MyWindow(QMainWindow, form_class):
 
 
 
+    class Simple_payment(QDialog, form_class2):
+        def __init__(self, outer_instance):
+            self.outer_instance = outer_instance
+            QDialog.__init__(self, outer_instance)
+            self.setupUi(self)
+
+            img_obj = QPixmap("../resources/etc/card.jpg")
+            self.card_image.setPixmap(img_obj)
+        def showModal(self):
+            return super().exec_()
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     myWindow = MyWindow()
-    #myWindow.showFullScreen()
     myWindow.show()
     app.exec_()

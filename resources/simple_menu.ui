@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
-    <height>750</height>
+    <width>730</width>
+    <height>822</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>661</width>
-      <height>701</height>
+      <height>791</height>
      </rect>
     </property>
     <property name="widgetResizable">
@@ -32,7 +32,7 @@
        <x>0</x>
        <y>0</y>
        <width>659</width>
-       <height>699</height>
+       <height>789</height>
       </rect>
      </property>
      <widget class="QScrollBar" name="verticalScrollBar">
