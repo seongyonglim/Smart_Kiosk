@@ -7,7 +7,6 @@ from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
 import copy
 from util.ReadDataBase import ReadDB
-import time
 
 form_class = uic.loadUiType("../resources/menu.ui")[0]
 

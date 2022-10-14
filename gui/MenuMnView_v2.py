@@ -12,7 +12,7 @@ from util.util import Util
 
 form_class = uic.loadUiType("../resources/simple_menu2.ui")[0]
 form_class2 = uic.loadUiType("../resources/simple_payment.ui")[0]
-class MyWindow(QMainWindow, form_class):
+class MinMenu(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -121,6 +121,6 @@ class MyWindow(QMainWindow, form_class):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    myWindow = MyWindow()
+    myWindow = MinMenu()
     myWindow.show()
     app.exec_()
