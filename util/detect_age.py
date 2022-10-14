@@ -1,9 +1,5 @@
 import sys
 import cv2
-from PyQt5.QtWidgets import QApplication
-from gui.MenuMnView_v2 import *
-from gui.MenuView import *
-from util.ReadDataBase import *
 
 class Detector:
 
@@ -14,7 +10,7 @@ class Detector:
         genderNet = cv2.dnn.readNetFromCaffe('../models/deployGender.prototxt', '../models/genderNet.caffemodel')
 
         ageList = ['(0~2)', '(4~10)', '(15~25)', '(30~35)',
-                   '(36~40)', '(41~46)', '(47~53)', '(80~)']
+                   '(65~70)', '(45~49)', '(50~55)', '(80~)']
         genderList = ['Man', 'Female']
 
         cap = cv2.VideoCapture(0)
@@ -46,8 +42,7 @@ class Detector:
 
             # 사진 출력
             cv2.imshow('Age', img)
-            if self.detect_age  :
-                break
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
@@ -58,12 +53,3 @@ if __name__ == "__main__":
     data = obj.detector()
     age_split = str(data).split('/')[1]
     age = age_split.split("~")[0]
-    app = QApplication(sys.argv)
-    if(int(age[1:len(age)]) > 46):
-        window = MinMenu()
-        window.show()
-        app.exec_()
-    else :
-        window = Menu()
-        window.show()
-        app.exec_()
