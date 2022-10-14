@@ -10,7 +10,7 @@ class Detector:
         genderNet = cv2.dnn.readNetFromCaffe('../models/deployGender.prototxt', '../models/genderNet.caffemodel')
 
         ageList = ['(0~2)', '(4~10)', '(15~25)', '(30~35)',
-                   '(65~70)', '(45~49)', '(50~55)', '(80~)']
+                   '(40~44)', '(45~49)', '(50~55)', '(80~)']
         genderList = ['Man', 'Female']
 
         cap = cv2.VideoCapture(0)
