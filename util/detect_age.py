@@ -4,18 +4,21 @@ import cv2
 class Detector:
 
     def detector( self):
-        cascade = cv2.CascadeClassifier('../models/haarcascade_frontalface_alt.xml')
+        cascade = cv2.CascadeClassifier('./models/haarcascade_frontalface_alt.xml')
         ModelMean = (78.4263377603, 87.7689143745, 114.895847746)
-        ageNet = cv2.dnn.readNetFromCaffe('../models/deployAge.prototxt', '../models/ageNet.caffemodel')
-        genderNet = cv2.dnn.readNetFromCaffe('../models/deployGender.prototxt', '../models/genderNet.caffemodel')
+        ageNet = cv2.dnn.readNetFromCaffe('./models/deployAge.prototxt', './models/ageNet.caffemodel')
+        genderNet = cv2.dnn.readNetFromCaffe('./models/deployGender.prototxt', './models/genderNet.caffemodel')
 
-        ageList = ['(0~2)', '(4~10)', '(15~25)', '(30~35)',
-                   '(40~44)', '(45~49)', '(50~55)', '(80~)']
+        ageList = ['(0~2)', '(4~10)', '(15~25)', '(30~40)',
+                   '(40~50)', '(50~60)', '(60~70)', '(80~)']
         genderList = ['Man', 'Female']
 
         cap = cv2.VideoCapture(0)
         self.flag = True
         self.detect_age = False
+        self.info = genderList[1] + '/' + ageList[7]
+        # self.info = genderList[1] + '/' + ageList[2]
+        # self.detect_age = True
         while self.flag:
             ret, img = cap.read()
 
@@ -43,9 +46,9 @@ class Detector:
             # 사진 출력
             cv2.imshow('Age', img)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            if cv2.waitKey(1) & 0xFF == ord('q') or self.detect_age:
                 break
-
+        print(self.info)
         return (self.info)
 
 if __name__ == "__main__":

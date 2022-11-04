@@ -5,8 +5,8 @@ from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
 from util.ReadDataBase import *
 
-form_class = uic.loadUiType("../resources/simple_menu.ui")[0]
-form_class2 = uic.loadUiType("../resources/simple_payment.ui")[0]
+form_class = uic.loadUiType("./resources/simple_menu.ui")[0]
+form_class2 = uic.loadUiType("./resources/simple_payment.ui")[0]
 class MenuMinView(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
@@ -46,7 +46,7 @@ class MenuMinView(QMainWindow, form_class):
             QDialog.__init__(self, outer_instance)
             self.setupUi(self)
 
-            img_obj = QPixmap("../resources/etc/card.jpg")
+            img_obj = QPixmap("./resources/etc/card.jpg")
             self.card_image.setPixmap(img_obj)
         def showModal(self):
             return super().exec_()

@@ -8,10 +8,11 @@ from PyQt5.QtCore import Qt
 import time
 
 import copy
+import os
 from util.util import Util
 
-form_class = uic.loadUiType("../resources/simple_menu2.ui")[0]
-form_class2 = uic.loadUiType("../resources/simple_payment.ui")[0]
+form_class = uic.loadUiType( "./resources/simple_menu2.ui")[0]
+form_class2 = uic.loadUiType( "./resources/simple_payment.ui")[0]
 class MinMenu(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
@@ -32,8 +33,6 @@ class MinMenu(QMainWindow, form_class):
 
         self.price_label_list = []
 
-        print(len(self.readData))
-        print(self.readData)
         for index in range(0 , len(self.readData)):
             self.addProduct(self.readData[index])
 
@@ -83,7 +82,6 @@ class MinMenu(QMainWindow, form_class):
             self.hlayout_list.append(hlayout)
             self.vlayout.addLayout(hlayout)
         elif (len(self.image_label_list) % 2) == 0:
-            print(len(self.hlayout_list))
             self.hlayout_list[(len(self.hlayout_list)-1)].addLayout(product_layout)
 
         self.util.clickable(image_label).connect(lambda: self.showDialog(row_data))
@@ -99,7 +97,7 @@ class MinMenu(QMainWindow, form_class):
             QDialog.__init__(self, outer_instance)
             self.setupUi(self)
 
-            img_obj = QPixmap("../resources/etc/card.jpg")
+            img_obj = QPixmap("./resources/etc/card.jpg")
             self.card_image.setPixmap(img_obj)
         def showModal(self):
             return super().exec_()

@@ -110,7 +110,6 @@ class SlideShow(QWidget):
             self.__btn.append(btn)
             self.__btnGroup.addButton(btn, i)
         self.__btn[0].setChecked(True)
-        print(self.__filenames)
         self.__view.setFilename(self.__filenames[0])
         self.__btnWidget.setLayout(lay)
 

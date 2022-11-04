@@ -5,8 +5,8 @@ from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
-form_class = uic.loadUiType("../resources/cart_view.ui")[0]
-form_class2 = uic.loadUiType("../resources/card_insert.ui")[0]
+form_class = uic.loadUiType("./resources/cart_view.ui")[0]
+form_class2 = uic.loadUiType("./resources/card_insert.ui")[0]
 
 class CartView(QMainWindow, form_class):
     def __init__(self):
@@ -20,18 +20,18 @@ class CartView(QMainWindow, form_class):
         self.scrollArea.setLayout(self.vlayout)
 
         data = [{'p_no': 2, 'p_name': '더블버거\t', 'p_price': 4500, 'p_category': 1, 'p_detail': '더블 버거',
-                 'p_img_url': '../resources/hamburger/doubleburger.jpg',
-                 'p_detail_img_url': '../resources/hamburger/doubleburger.jpg', 'p_nutrition': '312/390/38/20/0/752'},
+                 'p_img_url': './resources/hamburger/doubleburger.jpg',
+                 'p_detail_img_url': './resources/hamburger/doubleburger.jpg', 'p_nutrition': '312/390/38/20/0/752'},
                 {'p_no': 6, 'p_name': '핵폭탄버거', 'p_price': 12000, 'p_category': 1, 'p_detail': '고칼로리 수제버거',
-                 'p_img_url': '../resources/hamburger/핵폭탄버거.jpg',
-                 'p_detail_img_url': '../resources/hamburger/핵폭탄버거.jpg',
+                 'p_img_url': './resources/hamburger/핵폭탄버거.jpg',
+                 'p_detail_img_url': './resources/hamburger/핵폭탄버거.jpg',
                  'p_nutrition': '650/1707/50/105/120.8/50/3067'},
                    {'p_no': 1, 'p_name': '불고기버거\t', 'p_price': 4000, 'p_category': 1, 'p_detail': '불고기 소스를 이용한 버거',
-                 'p_img_url': '../resources/hamburger/bulgogiburger.jpg',
-                 'p_detail_img_url': '../resources/hamburger/bulgogiburger.jpg',
+                 'p_img_url': './resources/hamburger/bulgogiburger.jpg',
+                 'p_detail_img_url': './resources/hamburger/bulgogiburger.jpg',
                  'p_nutrition': '158/380/380/18/0/0/523'},
                 {'p_no': 5, 'p_name': '푸짐버거', 'p_price': 8000, 'p_category': 1, 'p_detail': '양이 푸짐한 햄버거',
-                 'p_img_url': '../resources/hamburger/푸짐버거.jpg', 'p_detail_img_url': '../resources/hamburger/푸짐버거.jpg',
+                 'p_img_url': './resources/hamburger/푸짐버거.jpg', 'p_detail_img_url': './resources/hamburger/푸짐버거.jpg',
                  'p_nutrition': '315/780/115/37/19/0/1368'}
                 ]
 
@@ -41,7 +41,11 @@ class CartView(QMainWindow, form_class):
 
         self.paymeny_btn.clicked.connect(lambda :self.showDialog())
 
+        print(self.payment_btn)
+        count_plus_btn = QPushButton("x")
+
     def showDialog(self):
+        print("show modal")
         self.simple_payment.showModal()
     def addProduct(self, row_data, count):
         # 상품명,
@@ -185,9 +189,10 @@ class CartView(QMainWindow, form_class):
             QDialog.__init__(self, outer_instance)
             self.setupUi(self)
 
-            img_obj = QPixmap("../resources/etc/card.jpg")
+            img_obj = QPixmap("./resources/etc/card.jpg")
             self.card_image.setPixmap(img_obj)
         def showModal(self):
+            print("payment")
             return super().exec_()
 
 if __name__ == "__main__":
