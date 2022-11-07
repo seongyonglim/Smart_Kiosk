@@ -110,7 +110,7 @@ class MinMenu(QMainWindow, form_class):
             self.product_image.setPixmap(img_obj)
 
             # 상품명
-            self.product_name.setText(self.row_data['p_name'])
+            #self.product_name.setText(self.row_data['p_name'])
             # 상품 가격
             self.product_price.setText(str(self.row_data['p_price']))
 

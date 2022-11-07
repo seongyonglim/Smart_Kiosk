@@ -62,7 +62,7 @@ if __name__ == '__main__':
         data = obj.detector()
         age_split = str(data).split('/')[1]
         age = age_split.split("~")[0]
-        if(int(age[1:len(age)]) > 50):
+        if(int(age[1:len(age)]) >= 55):
             window = MinMenu()
             window.show()
         else :

@@ -36,12 +36,12 @@ class CartView(QMainWindow, form_class):
                 ]
 
         for index in data:
-            self.addProduct(index,1)
+            self.addProduct(index,0)
         self.getPaymentPrice()
 
         self.paymeny_btn.clicked.connect(lambda :self.showDialog())
 
-        print(self.payment_btn)
+        #print(self.payment_btn)
         count_plus_btn = QPushButton("x")
 
     def showDialog(self):
